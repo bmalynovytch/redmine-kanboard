@@ -23,7 +23,7 @@ private
     query = base_query + "&title=#{title}&description=#{description}&project_id=#{kanboard.project_id}"
     req = Net::HTTP::Get.new(url.path + "?" + query)
     p req.path
-    res = Net::HTTP.start(url.host, url.port) { |http|
+    res = Net::HTTP.start(url.host, url.port, :use_ssl => url.scheme == 'https') { |http|
         http.request(req)
     }   
     puts res.body
